@@ -2,25 +2,354 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --arx-blue: #144992;
+  --arx-aqua: #27a9dd;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-arx-blue: var(--arx-blue);
+  --color-arx-aqua: var(--arx-aqua);
+  --font-sans: "General Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-jost);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "General Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.011em;
+}
+
+/* --- 은은한 그레인 텍스처 (플랫함 제거, 고급 질감) --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ===================================================================
+   Apple Liquid Glass — 통일 머티리얼 (.liquid-glass)
+   - frosted translucent + backdrop saturate (light bleed)
+   - ::before  : lensing/refraction 굴절 링 (위 밝게 → 아래 음영)
+   - ::after   : specular highlight (마우스 따라 이동, --gx/--gy)
+   - 한 영역엔 이 레이어 하나만 (중첩 금지). 텍스트는 항상 위 레이어에.
+   =================================================================== */
+.liquid-glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px 0 rgba(15, 23, 42, 0.05),
+    0 18px 48px -18px rgba(20, 73, 146, 0.28),
+    0 8px 18px -10px rgba(15, 23, 42, 0.12);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    background 0.4s ease;
+}
+
+/* Lensing/Refraction: 가장자리에서 빛이 휘는 1px 그라데이션 링 */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.2) 36%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(20, 73, 146, 0.2) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Specular highlight: 포인터를 따라 부드럽게 이동 */
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    260px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0) 60%
+  );
+  transition: opacity 0.4s ease;
+}
+.liquid-glass:hover::after {
+  opacity: 1;
+}
+
+/* Floating 상호작용 변형: 호버 시 살짝 떠오름 + Aqua 보더 글로우 */
+.liquid-glass--hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(39, 169, 221, 0.55);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+    0 28px 56px -18px rgba(20, 73, 146, 0.32),
+    0 12px 22px -8px rgba(39, 169, 221, 0.22);
+}
+
+/* 스크롤 시 더 또렷하게 (네비 등) */
+.liquid-glass--solid {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+/* 경량 칩: 다수/이동 요소(마퀴) → blur 미사용으로 성능 보호 */
+.liquid-glass-chip {
+  position: relative;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+    0 6px 16px -10px rgba(20, 73, 146, 0.18);
+}
+
+/* --- Hero: 은은하게 천천히 움직이는 그라데이션 블롭 --- */
+@keyframes arx-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(6%, 8%, 0) scale(1.12);
+  }
+}
+
+@keyframes arx-drift-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(-7%, -5%, 0) scale(1);
+  }
+}
+
+.arx-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.arx-blob-1 {
+  animation: arx-drift-1 22s ease-in-out infinite alternate;
+}
+
+.arx-blob-2 {
+  animation: arx-drift-2 28s ease-in-out infinite alternate;
+}
+
+/* 대시보드 카드: 아주 천천히 떠다니는 느낌 */
+@keyframes arx-float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.arx-float {
+  animation: arx-float 6s ease-in-out infinite alternate;
+}
+
+/* "Live" 표시 점의 부드러운 깜빡임 */
+@keyframes arx-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.arx-pulse {
+  animation: arx-pulse 2.4s ease-in-out infinite;
+}
+
+/* --- 신뢰 바: 가로 마퀴 (자동 스크롤) --- */
+@keyframes arx-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.arx-marquee-track {
+  display: flex;
+  width: max-content;
+  animation-name: arx-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.arx-marquee-reverse {
+  animation-direction: reverse;
+}
+
+/* 마우스 올리면 일시정지 */
+.arx-marquee:hover .arx-marquee-track {
+  animation-play-state: paused;
+}
+
+/* --- Thrivaca 엔진: 데이터 흐름 + 회전 글로우 --- */
+@keyframes arx-flow {
+  0% {
+    left: 2%;
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+  14% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 98%;
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+}
+
+@keyframes arx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.arx-spin {
+  animation: arx-spin 16s linear infinite;
+}
+
+/* --- Aurora mesh 그라데이션: 부드러운 색 덩어리가 흐물거리며 morph --- */
+.aurora-blob {
+  position: absolute;
+  width: 80%;
+  height: 85%;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+@keyframes aurora-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(14%, 10%) scale(1.25);
+  }
+}
+@keyframes aurora-2 {
+  0% {
+    transform: translate(0, 0) scale(1.15);
+  }
+  100% {
+    transform: translate(-12%, 8%) scale(0.92);
+  }
+}
+@keyframes aurora-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(10%, -12%) scale(1.2);
+  }
+}
+@keyframes aurora-4 {
+  0% {
+    transform: translate(0, 0) scale(1.08);
+  }
+  100% {
+    transform: translate(-14%, -8%) scale(1.22);
+  }
+}
+
+.aurora-a {
+  left: 2%;
+  top: -8%;
+  animation: aurora-1 22s ease-in-out infinite alternate;
+}
+.aurora-b {
+  right: -2%;
+  top: 4%;
+  animation: aurora-2 27s ease-in-out infinite alternate;
+}
+.aurora-c {
+  left: 8%;
+  bottom: -10%;
+  animation: aurora-3 24s ease-in-out infinite alternate;
+}
+.aurora-d {
+  right: 6%;
+  bottom: -4%;
+  animation: aurora-4 30s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arx-blob-1,
+  .arx-blob-2,
+  .arx-float,
+  .arx-pulse {
+    animation: none;
+  }
+
+  .arx-marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .arx-spin {
+    animation: none;
+  }
+
+  .aurora-a,
+  .aurora-b,
+  .aurora-c,
+  .aurora-d {
+    animation: none;
+  }
+
+  /* 광택 움직임 생략 (정적 glass 유지) */
+  .liquid-glass::after {
+    display: none;
+  }
 }

@@ -3,7 +3,7 @@
 import {
   HeartPulse,
   Landmark,
-  Factory,
+  FlaskConical,
   BrainCircuit,
   Handshake,
   type LucideIcon,
@@ -14,7 +14,7 @@ import { useInView, usePrefersReducedMotion } from "./useScrollReveal";
 const INDUSTRIES: { Icon: LucideIcon; name: string; text: string }[] = [
   { Icon: HeartPulse, name: "Healthcare", text: "Patient safety, regulatory exposure, connected systems." },
   { Icon: Landmark, name: "Financial Services", text: "Model risk, fraud, regulatory scrutiny." },
-  { Icon: Factory, name: "Critical Infrastructure", text: "Operational continuity, public safety, supply chain." },
+  { Icon: FlaskConical, name: "Biotech & Life Sciences", text: "R&D data, trial integrity, regulated AI decisions." },
   { Icon: BrainCircuit, name: "AI-Scaling Enterprises", text: "AI embedded in revenue-critical workflows." },
   { Icon: Handshake, name: "M&A / Private Equity", text: "Hidden digital liabilities, valuation risk." },
 ];

@@ -502,6 +502,8 @@ type Product = {
   color: string;
   question: string;
   desc: string;
+  /** 설명 아래 보조 한 줄 (해당되는 제품에만) */
+  note?: string;
   Visual: ({ active }: { active: boolean }) => ReactNode;
 };
 
@@ -528,6 +530,7 @@ const PRODUCTS: Product[] = [
     color: "#27a9dd",
     question: "What is AI exposure doing to EBITDA?",
     desc: "The only platform that quantifies AI exposure in dollars. Govern AI with financial clarity, not policy alone.",
+    note: "AI risk is not cyber risk. Model failure, bias, and wrong decisions cost money without a breach.",
     Visual: AIQNeural,
   },
   {
@@ -572,6 +575,11 @@ function ProductRow({ product, index }: { product: Product; index: number }) {
         <p className="mt-3 max-w-md text-base leading-relaxed text-slate-500">
           {product.desc}
         </p>
+        {product.note && (
+          <p className="mt-3 max-w-md border-l-2 border-slate-200 pl-4 text-sm leading-relaxed text-slate-500">
+            {product.note}
+          </p>
+        )}
       </div>
 
       {/* 비주얼 */}

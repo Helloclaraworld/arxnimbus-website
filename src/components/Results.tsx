@@ -68,9 +68,10 @@ function useCountTo(target: number, active: boolean, reduce: boolean, dur = 1400
 function ValidationCard() {
   const [ref, inView] = useInView(0.4);
   const reduce = usePrefersReducedMotion();
-  const acc = useCountTo(85, inView, reduce);
-  const proj = useCountTo(7.4, inView, reduce);
-  const act = useCountTo(6.3, inView, reduce);
+  // 카운트업 타겟 — 공식 수치 기준
+  const acc = useCountTo(8, inView, reduce); // within 8%
+  const proj = useCountTo(7.87, inView, reduce); // 예측 $7.87B
+  const act = useCountTo(6.872, inView, reduce); // 실제 손실 $6.872B
 
   const fadeUp = (delay: number) => ({
     opacity: inView ? 1 : 0,
@@ -83,8 +84,8 @@ function ValidationCard() {
   const steps = [
     {
       color: "#144992",
-      title: "Before the breach",
-      text: "ArxNimbus quantified the exposure ahead of the event.",
+      title: "Predicted April 17, 2023",
+      text: "Thrivaca quantified the exposure 310 days before the breach was confirmed.",
       icon: (
         <>
           <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
@@ -94,8 +95,8 @@ function ValidationCard() {
     },
     {
       color: "#f59e0b",
-      title: "The breach",
-      text: `UnitedHealthcare — $${act.toFixed(1)}B actual loss.`,
+      title: "February 2024 — the breach",
+      text: `Change Healthcare ransomware (a UnitedHealth Group subsidiary) — $${act.toFixed(3)}B actual loss.`,
       icon: (
         <>
           <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
@@ -107,7 +108,7 @@ function ValidationCard() {
     {
       color: "#16a34a",
       title: "Validated",
-      text: `Projected $${proj.toFixed(1)}B ≈ Actual $${act.toFixed(1)}B.`,
+      text: `Projected $${proj.toFixed(2)}B vs. actual $${act.toFixed(3)}B.`,
       icon: <path d="M20 6 9 17l-5-5" />,
     },
   ];
@@ -136,13 +137,13 @@ function ValidationCard() {
       <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[#144992]/12 blur-3xl" />
 
       <p className="relative text-[11px] font-semibold uppercase tracking-widest text-[#27a9dd]">
-        Validation · UnitedHealthcare breach
+        Validation · Change Healthcare breach
       </p>
       <p className="relative mt-2 bg-gradient-to-r from-[#144992] to-[#27a9dd] bg-clip-text text-5xl font-bold tabular-nums leading-none tracking-tight text-transparent sm:text-6xl">
-        {Math.round(acc)}%
+        Within {Math.round(acc)}%
       </p>
       <p className="relative mt-2 text-sm font-medium text-slate-500">
-        predictive accuracy
+        of the actual loss outcome
       </p>
 
       {/* 타임라인 */}
@@ -213,7 +214,7 @@ type Stat = {
 const STATS: Stat[] = [
   { value: 5, suffix: "X", label: "Stronger predictive signal", sub: "vs. traditional scoring models" },
   { value: 4, suffix: "X", label: "Better loss outcomes", sub: "vs. industry averages" },
-  { prefix: "Within ", value: 7, suffix: "%", label: "Of actual loss outcomes", sub: "backtested against real breach data" },
+  { prefix: "Within ", value: 8, suffix: "%", label: "Of actual loss outcomes", sub: "backtested against real breach data" },
   { prefix: "$10–$", value: 144, label: "Risk reduction per $1 invested", sub: "measured across engagements" },
   { value: 60000, suffix: "+", label: "Real-world losses analyzed", sub: "and continuously growing" },
   { value: 580, label: "Industries benchmarked", sub: "NAICS-aligned peer sets" },

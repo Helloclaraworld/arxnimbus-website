@@ -43,7 +43,7 @@ export default function FinalCTA() {
               <span className="mx-2 text-slate-300">·</span>
               35% of S&amp;P 500 analyzed
               <span className="mx-2 text-slate-300">·</span>
-              Within 7% forecast accuracy
+              Within 8% forecast accuracy
             </p>
           </div>
         </Reveal>

@@ -7,6 +7,7 @@ import Products from "@/components/Products";
 import Results from "@/components/Results";
 import Stakeholders from "@/components/Stakeholders";
 import Industries from "@/components/Industries";
+import Triggers from "@/components/Triggers";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
@@ -23,6 +24,7 @@ export default function Home() {
         <Results />
         <Stakeholders />
         <Industries />
+        <Triggers />
         <FinalCTA />
       </main>
       <Footer />

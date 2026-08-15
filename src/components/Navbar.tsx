@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
   { label: "Platform", href: "#platform", id: "platform" },
@@ -46,22 +47,25 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 px-4 pt-3 sm:px-6">
       <nav
-        className={`liquid-glass mx-auto flex max-w-6xl items-center justify-between gap-6 rounded-2xl px-5 transition-all duration-300 ${
+        className={`liquid-glass mx-auto flex max-w-6xl items-center justify-between gap-8 rounded-2xl px-5 transition-all duration-300 lg:gap-12 ${
           scrolled ? "liquid-glass--solid py-2.5" : "py-3.5"
         }`}
       >
         {/* 로고 → 맨 위 */}
-        <a href="#top" className="flex items-center" aria-label="ArxNimbus — 맨 위로">
+        <Link
+          href="#top"
+          className="flex shrink-0 items-center"
+          aria-label="ArxNimbus — 맨 위로"
+        >
           <Image
-            src="/logo.webp"
-            alt="ArxNimbus — Secure the business."
-            width={118}
-            height={40}
-            priority
-            className="h-10 w-auto"
-            style={{ height: "40px", width: "auto" }}
+            src="/logo-arxnimbus.png"
+            alt="ArxNimbus"
+            width={281}
+            height={100}
+            preload
+            className="h-9 w-auto md:h-10"
           />
-        </a>
+        </Link>
 
         {/* 메뉴 (데스크탑) */}
         <div className="hidden items-center gap-7 lg:flex">

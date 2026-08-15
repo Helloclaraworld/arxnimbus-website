@@ -50,15 +50,14 @@ export default function Footer() {
     <footer className="relative border-t border-white/50">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          {/* 브랜드 (로고에 'Secure the business.' 태그라인 포함) */}
+          {/* 브랜드 */}
           <div>
             <Image
-              src="/logo.webp"
-              alt="ArxNimbus — Secure the business."
-              width={170}
-              height={58}
-              className="h-14 w-auto"
-              style={{ height: "56px", width: "auto" }}
+              src="/logo-arxnimbus.png"
+              alt="ArxNimbus"
+              width={281}
+              height={100}
+              className="h-12 w-auto"
             />
           </div>
 

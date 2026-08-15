@@ -5,7 +5,7 @@ import { useInView, usePrefersReducedMotion } from "./useScrollReveal";
 
 const ROLES = [
   { role: "CEO", color: "#144992", text: "Protect EBITDA while scaling digital transformation." },
-  { role: "CFO / Chief Risk Officer", color: "#1f7fb0", text: "Turn digital exposure into financial governance." },
+  { role: "CFO / CRO", color: "#1f7fb0", text: "Turn digital exposure into financial governance." },
   { role: "Board / Audit", color: "#27a9dd", text: "Govern AI and cyber exposure in dollars." },
   { role: "CISO", color: "#68c6d1", text: "Make security measurable, fundable, board-relevant." },
   { role: "AI Governance Leader", color: "#8c52ff", text: "Show which AI initiatives can scale with confidence." },

@@ -33,7 +33,7 @@ export default function Triggers() {
 
   return (
     <section id="triggers" className="relative scroll-mt-24">
-      <div className="mx-auto max-w-4xl px-6 py-28 sm:py-36">
+      <div className="mx-auto max-w-5xl px-6 py-28 sm:py-36">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             When leadership needs the number.
@@ -43,15 +43,15 @@ export default function Triggers() {
           </p>
         </Reveal>
 
-        {/* 왼쪽 정렬 가로 행 — 아이콘은 타일 없이 단독, Arx Aqua */}
+        {/* 3칸 그리드 — 산업 섹션(흰색 글래스 5칸)과 구분되는 Arx Blue 틴트 카드 */}
         <div
           ref={ref}
-          className="mx-auto mt-16 flex max-w-2xl flex-col gap-12 sm:mt-20 sm:gap-14"
+          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-7"
         >
           {TRIGGERS.map(({ Icon, label, text }, i) => (
+            // 바깥: 스크롤 진입 애니메이션 (인라인 transform) / 안쪽: hover (클래스 transform)
             <div
               key={label}
-              className="flex items-center gap-5 sm:gap-7"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "none" : "translateY(16px)",
@@ -60,14 +60,17 @@ export default function Triggers() {
                   : `opacity .55s ease ${i * 0.12}s, transform .55s cubic-bezier(.22,1,.36,1) ${i * 0.12}s`,
               }}
             >
-              <Icon
-                className="h-8 w-8 shrink-0 text-[#27a9dd] sm:h-10 sm:w-10"
-                strokeWidth={1.25}
-                aria-hidden="true"
-              />
-              <div>
-                <p className="text-lg font-semibold text-slate-900">{label}</p>
-                <p className="mt-1 text-sm leading-relaxed text-slate-500">
+              {/* Tailwind v4 는 -translate-y 를 transform 이 아니라 translate 속성으로 낸다 */}
+              <div className="group h-full rounded-2xl border border-[rgba(39,169,221,0.25)] bg-[rgba(20,73,146,0.05)] p-7 backdrop-blur-md transition-[translate,border-color] duration-[250ms] ease-out hover:-translate-y-1 hover:border-[rgba(39,169,221,0.6)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-8">
+                <Icon
+                  className="h-9 w-9 text-[#27a9dd] transition-transform duration-[250ms] ease-out group-hover:scale-[1.08] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+                <p className="mt-5 text-lg font-semibold text-slate-900">
+                  {label}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">
                   {text}
                 </p>
               </div>

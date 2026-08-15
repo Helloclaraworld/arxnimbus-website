@@ -22,9 +22,9 @@ export default function Home() {
         <ThrivacaEngine />
         <Products />
         <Results />
-        <Stakeholders />
         <Industries />
         <Triggers />
+        <Stakeholders />
         <FinalCTA />
       </main>
       <Footer />

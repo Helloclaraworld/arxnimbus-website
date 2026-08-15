@@ -39,7 +39,8 @@ export default function Hero() {
 
           <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Quantify cyber and AI exposure.{" "}
-            <span className="bg-gradient-to-r from-[#144992] to-[#27a9dd] bg-clip-text text-transparent">
+            {/* block + w-fit: 항상 새 줄에서 시작하되, 그라데이션은 글자 폭에만 걸리게 */}
+            <span className="block w-fit bg-gradient-to-r from-[#144992] to-[#27a9dd] bg-clip-text text-transparent">
               In dollars.
             </span>
           </h1>

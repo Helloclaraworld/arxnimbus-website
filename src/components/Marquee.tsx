@@ -7,18 +7,21 @@ import { type ReactNode } from "react";
  * - prefers-reduced-motion 시 정지 (globals.css)
  * - 양 끝 흰색 페이드로 깔끔하게 사라지는 느낌
  */
-export default function Marquee({
+export default function Marquee<T>({
   items,
   renderItem,
   reverse = false,
   speed = 32,
   repeat = 2,
+  gapClassName = "gap-3 pr-3",
 }: {
-  items: string[];
-  renderItem: (item: string) => ReactNode;
+  items: T[];
+  renderItem: (item: T) => ReactNode;
   reverse?: boolean;
   speed?: number;
   repeat?: number;
+  /** 아이템 간격. 그룹 이음매가 벌어지지 않도록 gap 과 pr 을 같은 값으로 둘 것 */
+  gapClassName?: string;
 }) {
   // 짧은 목록도 화면을 채우도록 반복 (seamless loop 보장)
   const sequence = Array.from({ length: repeat }).flatMap(() => items);
@@ -33,7 +36,7 @@ export default function Marquee({
         {[0, 1].map((group) => (
           <div
             key={group}
-            className="flex shrink-0 gap-3 pr-3"
+            className={`flex shrink-0 items-center ${gapClassName}`}
             aria-hidden={group === 1}
           >
             {sequence.map((item, i) => (

@@ -47,7 +47,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 px-4 pt-3 sm:px-6">
       <nav
-        className={`liquid-glass mx-auto flex max-w-6xl items-center justify-between gap-8 rounded-2xl px-5 transition-all duration-300 lg:gap-12 ${
+        className={`liquid-glass mx-auto flex max-w-6xl items-center justify-between gap-10 rounded-2xl px-6 transition-all duration-300 lg:gap-16 ${
           scrolled ? "liquid-glass--solid py-2.5" : "py-3.5"
         }`}
       >
@@ -63,19 +63,19 @@ export default function Navbar() {
             width={281}
             height={100}
             preload
-            className="h-9 w-auto md:h-10"
+            className="h-11 w-auto md:h-12"
           />
         </Link>
 
         {/* 메뉴 (데스크탑) */}
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-9 lg:flex">
           {navLinks.map((link) => {
             const active = activeId === link.id;
             return (
               <a
                 key={link.label}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-lg font-medium transition-colors ${
                   active
                     ? "font-semibold text-[#144992]"
                     : "text-slate-600 hover:text-[#144992]"
@@ -90,7 +90,7 @@ export default function Navbar() {
         {/* CTA → 최종 CTA 섹션 */}
         <a
           href="#demo"
-          className="rounded-full bg-[#144992] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f3a76]"
+          className="shrink-0 rounded-full bg-[#144992] px-6 py-3 text-lg font-semibold text-white shadow-sm transition-colors hover:bg-[#0f3a76]"
         >
           Book Demo
         </a>

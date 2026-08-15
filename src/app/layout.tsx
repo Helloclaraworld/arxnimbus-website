@@ -12,10 +12,26 @@ const jost = Jost({
   display: "swap",
 });
 
+const TITLE = "ArxNimbus | AI and Cyber Risk Quantification";
+const DESCRIPTION =
+  "Quantify cyber and AI exposure in financial terms. Actuarial risk intelligence built on NIST-aligned methodology, trusted by enterprises and insurers.";
+
 export const metadata: Metadata = {
-  title: "ArxNimbus — Quantify cyber and AI exposure. In dollars.",
-  description:
-    "The Thrivaca AI Engine turns your security and AI exposure data into financial intelligence your board can act on. It's not magic. It's math.",
+  title: TITLE,
+  description: DESCRIPTION,
+  // title/description 만으로는 og:/twitter: 태그가 생성되지 않아 명시적으로 선언
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "ArxNimbus",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

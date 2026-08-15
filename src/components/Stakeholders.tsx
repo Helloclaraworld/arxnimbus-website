@@ -28,12 +28,12 @@ export default function Stakeholders() {
           </p>
         </Reveal>
 
-        {/* 단일 glass 패널 안에 역할별 행 (네모 최소화) */}
-        <div ref={ref} className="liquid-glass mt-14 overflow-hidden rounded-3xl">
+        {/* 박스 없이 페이지 위에 바로. CTA 섹션만 박스로 남겨 대비를 만듦 */}
+        <div ref={ref} className="mt-14">
           {ROLES.map((r, i) => (
             <div
               key={r.role}
-              className="flex flex-col gap-1 border-t border-white/40 px-6 py-5 first:border-t-0 sm:flex-row sm:items-center sm:gap-8 sm:px-8"
+              className="flex flex-col gap-1 border-t border-slate-200/60 py-5 first:border-t-0 sm:flex-row sm:items-center sm:gap-8"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "none" : "translateY(14px)",

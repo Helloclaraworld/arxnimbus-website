@@ -60,17 +60,18 @@ export default function Triggers() {
                   : `opacity .55s ease ${i * 0.12}s, transform .55s cubic-bezier(.22,1,.36,1) ${i * 0.12}s`,
               }}
             >
-              {/* Tailwind v4 는 -translate-y 를 transform 이 아니라 translate 속성으로 낸다 */}
-              <div className="group h-full rounded-2xl border border-[rgba(39,169,221,0.25)] bg-[rgba(20,73,146,0.05)] p-7 backdrop-blur-md transition-[translate,border-color] duration-[250ms] ease-out hover:-translate-y-1 hover:border-[rgba(39,169,221,0.6)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-8">
+              {/* 사이트 공용 글래스 머티리얼 재사용 (blur/하이라이트/렌즈링 포함).
+                  --aqua: 기본 보더 Arx Aqua / --hover: 떠오름 + Aqua 보더 글로우 */}
+              <div className="liquid-glass liquid-glass--aqua liquid-glass--hover group h-full rounded-2xl p-7 sm:p-8">
                 <Icon
-                  className="h-9 w-9 text-[#27a9dd] transition-transform duration-[250ms] ease-out group-hover:scale-[1.08] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  className="relative h-9 w-9 text-[#27a9dd] transition-transform duration-[250ms] ease-out group-hover:scale-[1.08] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
-                <p className="mt-5 text-lg font-semibold text-slate-900">
+                <p className="relative mt-5 text-lg font-semibold text-slate-900">
                   {label}
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                <p className="relative mt-2 text-sm leading-relaxed text-slate-500">
                   {text}
                 </p>
               </div>

@@ -56,8 +56,10 @@ body::after {
 .liquid-glass {
   position: relative;
   background: rgba(255, 255, 255, 0.5);
+  /* prefix 는 번들러가 package.json browserslist 타깃에 맞춰 붙인다.
+     browserslist 가 없으면 Lightning CSS 가 표준 속성을 떨어뜨리고
+     -webkit- 만 남겨 blur 가 전혀 걸리지 않으니 그 설정을 지울 것 */
   backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.45);
   box-shadow:
     inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
@@ -125,6 +127,12 @@ body::after {
 /* 스크롤 시 더 또렷하게 (네비 등) */
 .liquid-glass--solid {
   background: rgba(255, 255, 255, 0.74);
+}
+
+/* 기본 보더를 Arx Aqua 옅은 선으로 (트리거 카드).
+   .liquid-glass 와 특이도가 같으므로 반드시 그 뒤에 와야 이김 */
+.liquid-glass--aqua {
+  border-color: rgba(39, 169, 221, 0.25);
 }
 
 /* 경량 칩: 다수/이동 요소(마퀴) → blur 미사용으로 성능 보호 */

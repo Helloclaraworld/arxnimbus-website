@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import Aurora from "./Aurora";
+import { LINKEDIN_URL, LinkedInIcon } from "./linkedin";
 
 export default function FinalCTA() {
   return (
@@ -31,12 +32,27 @@ export default function FinalCTA() {
                 Book a Demo
               </a>
               <a
-                href="#platform"
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white/70 px-7 py-3.5 text-sm font-semibold text-slate-700 backdrop-blur transition-colors hover:border-[#144992] hover:text-[#144992]"
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/70 px-7 py-3.5 text-sm font-semibold text-slate-700 backdrop-blur transition-colors hover:border-[#144992] hover:text-[#144992]"
               >
-                See the AI Engine
+                <LinkedInIcon className="h-4 w-4" />
+                Follow on LinkedIn
               </a>
             </div>
+
+            <p className="mt-6 text-sm text-slate-500">
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-[#27a9dd]"
+              >
+                Monthly Exec Briefing: what quantified exposure actually
+                changes.
+              </a>
+            </p>
 
             <p className="mt-8 text-xs text-slate-400">
               NIST-approved methodology
